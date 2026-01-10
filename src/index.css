@@ -1,0 +1,16 @@
+/* ============================================
+   DRAZ WIDGET - MAIN STYLESHEET
+   ============================================ */
+
+/* Framework */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Modular Styles */
+@import "./styles/animations.css";
+@import "./styles/typography.css";
+@import "./styles/launcher.css";
+@import "./styles/theme.css";
+@import "./styles/base.css";

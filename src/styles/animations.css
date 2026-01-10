@@ -1,0 +1,46 @@
+/* Widget open/close animations */
+@keyframes widget-open {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes widget-close {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@keyframes typing-dot-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-widget-open {
+  animation: widget-open 0.25s ease-out forwards;
+  transform-origin: bottom right;
+}
+
+.animate-widget-close {
+  animation: widget-close 0.25s ease-in forwards;
+  transform-origin: bottom right;
+}
+
+.animate-typing-dot {
+  animation: typing-dot-bounce 0.8s ease-in-out infinite;
+}

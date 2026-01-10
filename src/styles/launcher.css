@@ -1,0 +1,154 @@
+/* Launcher button attention animations - database configurable */
+
+/* Pulse - subtle scale with shadow ring */
+@keyframes launcher-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(157, 157, 157, 0.7);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 12px rgba(157, 157, 157, 0);
+  }
+}
+.animate-launcher-pulse {
+  animation: launcher-pulse 2s ease-in-out 3;
+}
+
+/* Bounce - vertical bounce with decay */
+@keyframes launcher-bounce {
+  0% {
+    transform: translateY(0);
+  }
+  15% {
+    transform: translateY(-20px);
+  }
+  30% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(-12px);
+  }
+  60% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(-5px);
+  }
+  90%,
+  100% {
+    transform: translateY(0);
+  }
+}
+.animate-launcher-bounce {
+  animation: launcher-bounce 1.8s ease-out 2;
+}
+
+/* Wiggle - rotation oscillation */
+@keyframes launcher-wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+.animate-launcher-wiggle {
+  animation: launcher-wiggle 0.5s ease-in-out 4;
+}
+
+/* Shake - horizontal shake */
+@keyframes launcher-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-4px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+.animate-launcher-shake {
+  animation: launcher-shake 0.8s ease-in-out 2;
+}
+
+/* Heartbeat - double pulse */
+@keyframes launcher-heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.15);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.15);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+.animate-launcher-heartbeat {
+  animation: launcher-heartbeat 1.5s ease-in-out 2;
+}
+
+/* Glow - shadow pulse */
+@keyframes launcher-glow {
+  0%,
+  100% {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 0 0 0 rgba(99, 102, 241, 0);
+  }
+  50% {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 0 20px 8px rgba(99, 102, 241, 0.5);
+  }
+}
+.animate-launcher-glow {
+  animation: launcher-glow 2s ease-in-out 3;
+}
+
+/* Tada - scale + rotation combo */
+@keyframes launcher-tada {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  10% {
+    transform: scale(0.9) rotate(-3deg);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: scale(1.1) rotate(3deg);
+  }
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: scale(1.1) rotate(-3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+.animate-launcher-tada {
+  animation: launcher-tada 1.5s ease-in-out 1;
+}
