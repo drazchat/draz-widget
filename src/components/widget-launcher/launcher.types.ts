@@ -1,4 +1,4 @@
-import type { WidgetConfig } from "@/context/widget-config.types";
+import type { WidgetConfig } from "@/context";
 
 /**
  * Props for the main WidgetLauncher component

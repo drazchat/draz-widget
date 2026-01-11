@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { WidgetConfigContext } from "./WidgetConfigContext.context";
+import { WidgetConfigContext } from "./widget-config.context";
 import type { WidgetConfigContextType } from "./widget-config.types";
 
 // Hook to use widget config

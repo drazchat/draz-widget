@@ -1,10 +1,12 @@
 import { useState, useMemo, useCallback, Component, memo } from "react";
 import type { ReactNode, ErrorInfo } from "react";
-import WidgetLauncher from "./components/widget-lanucher";
-import { WidgetConfigProvider } from "./context/WidgetConfigContext";
+import WidgetLauncher from "./components/widget-launcher";
 import Widget from "./components/widget";
-import { useWidgetConfig } from "./context/useWidgetConfig";
-import { SocketProvider } from "./context/SocketContext";
+import {
+  WidgetConfigProvider,
+  useWidgetConfig,
+  SocketProvider,
+} from "./context";
 
 // Position class mapping for O(1) lookup
 const POSITION_CLASSES = {

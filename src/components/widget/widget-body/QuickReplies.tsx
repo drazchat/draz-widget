@@ -1,5 +1,6 @@
-import { useSocket } from "../../../context/useSocket";
-import type { QuickReply } from "../../../context/socket.types";
+import { useSocket, useWidgetConfig } from "@/context";
+import type { QuickReply } from "@/context";
+import { getFontSizeClass } from "@/lib/font-utils";
 
 interface QuickRepliesProps {
   quickReplies: QuickReply[];
@@ -7,6 +8,7 @@ interface QuickRepliesProps {
 
 const QuickReplies = ({ quickReplies }: QuickRepliesProps) => {
   const { sendMessage } = useSocket();
+  const { config } = useWidgetConfig();
 
   if (!quickReplies || quickReplies.length === 0) return null;
 
@@ -21,7 +23,9 @@ const QuickReplies = ({ quickReplies }: QuickRepliesProps) => {
         <button
           key={index}
           onClick={() => handleClick(reply)}
-          className="px-3 py-2 text-sm bg-white border border-[#e5e7eb] text-[#4b5563] rounded-full hover:bg-gray-100 hover:border-gray-300 transition-colors cursor-pointer"
+          className={`px-3 py-2 bg-white border border-[#e5e7eb] text-[#4b5563] rounded-full hover:bg-gray-100 hover:border-gray-300 transition-colors cursor-pointer ${getFontSizeClass(
+            config.fontSize
+          )}`}
         >
           {reply.label}
         </button>

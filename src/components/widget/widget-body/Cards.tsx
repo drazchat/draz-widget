@@ -1,6 +1,6 @@
-import { useSocket } from "../../../context/useSocket";
-import type { Card } from "../../../context/socket.types";
-import { useWidgetConfig } from "../../../context/useWidgetConfig";
+import { useSocket, useWidgetConfig } from "@/context";
+import type { Card } from "@/context";
+import { getFontSizeClass } from "@/lib/font-utils";
 
 interface CardsProps {
   cards: Card[];
@@ -36,13 +36,17 @@ const Cards = ({ cards }: CardsProps) => {
           <div className="px-0">
             <div className="px-4">
               <h4
-                className={`font-medium font-${config.fontSize} text-gray-900`}
+                className={`font-medium ${getFontSizeClass(
+                  config.fontSize
+                )} text-gray-900`}
               >
                 {card.title}
               </h4>
               {card.description && (
                 <p
-                  className={`text-gray-600 mt-1 mb-4 font-${config.fontSize}`}
+                  className={`text-gray-600 mt-1 mb-4 ${getFontSizeClass(
+                    config.fontSize
+                  )}`}
                 >
                   {card.description}
                 </p>
@@ -58,7 +62,9 @@ const Cards = ({ cards }: CardsProps) => {
                     onClick={() =>
                       handleOptionClick(option.label, option.value)
                     }
-                    className={`px-4 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors cursor-pointer border-t border-gray-200 max-w-full last:py-3 font-${config.fontSize}`}
+                    className={`px-4 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors cursor-pointer border-t border-gray-200 max-w-full last:py-3 ${getFontSizeClass(
+                      config.fontSize
+                    )}`}
                     title={option.label}
                   >
                     {option.label}

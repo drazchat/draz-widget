@@ -1,4 +1,4 @@
-import type { LauncherAnimation } from "@/context/widget-config.types";
+import type { LauncherAnimation } from "@/context";
 
 /**
  * CSS animation class mappings for launcher animations

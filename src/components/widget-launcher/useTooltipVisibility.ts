@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { useSocket } from "@/context/useSocket";
+import { useSocket } from "@/context";
 
 interface TooltipVisibilityResult {
   showTooltip: boolean;
@@ -33,7 +33,6 @@ export function useTooltipVisibility(
   }, [messages]);
 
   const tooltipMessage = lastBotMessage?.text;
-  console.log("showTooltip", showTooltip, "tooltipMessage", tooltipMessage);
 
   useEffect(() => {
     const widgetJustClosed = wasOpenRef.current && !isOpen;
