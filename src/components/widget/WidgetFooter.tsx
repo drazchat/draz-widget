@@ -61,8 +61,8 @@ const WidgetFooter = ({
       </div>
 
       {config?.showBranding !== false && (
-        <div className="dz:flex dz:items-center dz:gap-2 dz:text-[10px] !dz:text-[#aeaeae] dz:pt-2 dz:-mb-2">
-          <p>Powered by</p>
+        <div className="dz:flex dz:items-center dz:gap-2 dz:text-[10px] dz:pt-2 dz:-mb-2">
+          <p className="dz:text-[#aeaeae]">Powered by</p>
           <a
             href="https://draz.chat"
             target="_blank"
@@ -76,7 +76,9 @@ const WidgetFooter = ({
               height={15}
               className="dz:grayscale-100 group-hover:dz:grayscale-0"
             />
-            <p className="group-hover:dz:text-blue-600">Draz.chat</p>
+            <p className="dz:text-[#aeaeae] group-hover:dz:text-blue-600">
+              Draz.chat
+            </p>
           </a>
         </div>
       )}
