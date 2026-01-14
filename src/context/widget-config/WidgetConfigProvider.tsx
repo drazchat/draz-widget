@@ -38,7 +38,7 @@ export const WidgetConfigProvider = ({ children }: { children: ReactNode }) => {
         return;
       }
 
-      const endpoint = `${API_URL}/widget/config/${workspaceId}`;
+      const endpoint = `${API_URL}/auth/widget/config/${workspaceId}`;
 
       try {
         const response = await fetch(endpoint, {
