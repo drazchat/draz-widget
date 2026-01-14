@@ -75,8 +75,8 @@ const Widget = ({ isOpen, setIsOpen, config }: WidgetProps) => {
 
   return (
     <div
-      className={`flex h-[800px] max-h-[calc(100vh-6rem)] w-[400px] flex-col overflow-hidden rounded-2xl shadow-2xl ${
-        isClosing ? "animate-widget-close" : "animate-widget-open"
+      className={`dz:flex dz:h-[800px] dz:max-h-[calc(100vh-6rem)] dz:w-[400px] dz:flex-col dz:overflow-hidden dz:rounded-2xl dz:shadow-2xl ${
+        isClosing ? "dz:animate-widget-close" : "dz:animate-widget-open"
       }`}
       onAnimationEnd={handleAnimationEnd}
     >

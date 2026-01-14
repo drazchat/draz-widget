@@ -18,33 +18,36 @@ const Cards = ({ cards }: CardsProps) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-3 mt-1">
+    <div className="dz:w-full dz:flex dz:flex-col dz:gap-3 dz:mt-1">
       {cards.map((card, cardIndex) => (
-        <div key={cardIndex} className="bg-gray-100 rounded-xl overflow-hidden">
+        <div
+          key={cardIndex}
+          className="dz:bg-gray-100 dz:rounded-xl dz:overflow-hidden"
+        >
           {/* Card Image */}
           {card.image && (
-            <div className="w-full h-40 overflow-hidden">
+            <div className="dz:w-full dz:h-40 dz:overflow-hidden">
               <img
                 src={card.image}
                 alt={card.title}
-                className="w-full h-full object-cover p-4 rounded-3xl"
+                className="dz:w-full dz:h-full dz:object-cover dz:p-4 dz:rounded-3xl"
               />
             </div>
           )}
 
           {/* Card Content */}
-          <div className="px-0">
-            <div className="px-4">
+          <div className="dz:px-0">
+            <div className="dz:px-4">
               <h4
-                className={`font-medium ${getFontSizeClass(
+                className={`dz:font-medium ${getFontSizeClass(
                   config.fontSize
-                )} text-gray-900`}
+                )} dz:text-gray-900`}
               >
                 {card.title}
               </h4>
               {card.description && (
                 <p
-                  className={`text-gray-600 mt-1 mb-4 ${getFontSizeClass(
+                  className={`dz:text-gray-600 dz:mt-1 dz:mb-4 ${getFontSizeClass(
                     config.fontSize
                   )}`}
                 >
@@ -55,14 +58,14 @@ const Cards = ({ cards }: CardsProps) => {
 
             {/* Card Options/Buttons */}
             {card.options && card.options.length > 0 && (
-              <div className="flex flex-col gap-0">
+              <div className="dz:flex dz:flex-col dz:gap-0">
                 {card.options.map((option, optIndex) => (
                   <button
                     key={optIndex}
                     onClick={() =>
                       handleOptionClick(option.label, option.value)
                     }
-                    className={`px-4 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors cursor-pointer border-t border-gray-200 max-w-full last:py-3 ${getFontSizeClass(
+                    className={`dz:px-4 dz:py-2 dz:bg-gray-100 dz:text-gray-700 hover:dz:bg-gray-200 dz:transition-colors dz:cursor-pointer dz:border-t dz:border-gray-200 dz:max-w-full last:dz:py-3 ${getFontSizeClass(
                       config.fontSize
                     )}`}
                     title={option.label}

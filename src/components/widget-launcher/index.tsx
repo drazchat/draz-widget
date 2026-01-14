@@ -32,9 +32,9 @@ const WidgetLauncher = ({ isOpen, setIsOpen, config }: WidgetLauncherProps) => {
     const effectiveColor = config.widgetLauncherColor || DEFAULT_LAUNCHER_COLOR;
     const isDark = isColorDark(effectiveColor);
     return {
-      text: isDark ? "text-white" : "text-gray-900",
-      subtitle: isDark ? "text-white/70" : "text-gray-500",
-      hover: isDark ? "hover:bg-white/15" : "hover:bg-black/10",
+      text: isDark ? "dz:text-white" : "dz:text-gray-900",
+      subtitle: isDark ? "dz:text-white/70" : "dz:text-gray-500",
+      hover: isDark ? "hover:dz:bg-white/15" : "hover:dz:bg-black/10",
     };
   }, [config.widgetLauncherColor]);
 

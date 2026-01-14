@@ -19,12 +19,12 @@ const WidgetFooter = ({
   onRestartConversation,
 }: WidgetFooterProps) => {
   return (
-    <div className="flex flex-col pb-4 items-center justify-between px-4 pt-4 border-t border-gray-100 w-full bg-white">
-      <div className="relative w-full flex gap-2 items-center">
+    <div className="dz:flex dz:flex-col dz:pb-4 dz:items-center dz:justify-between dz:px-4 dz:pt-4 dz:border-t dz:border-gray-100 dz:w-full dz:bg-white">
+      <div className="dz:relative dz:w-full dz:flex dz:gap-2 dz:items-center">
         {config?.showHomeButton !== false && (
-          <div className="cursor-pointer" onClick={onRestartConversation}>
+          <div className="dz:cursor-pointer" onClick={onRestartConversation}>
             <svg
-              className="w-8 h-8 fill-gray-400 hover:fill-gray-600 transition-colors"
+              className="dz:w-8 dz:h-8 dz:fill-gray-400 hover:dz:fill-gray-600 dz:transition-colors"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -44,11 +44,11 @@ const WidgetFooter = ({
           onChange={(e) => onInputChange(e.target.value)}
           onKeyDown={onKeyDown}
           placeholder="Ask a question"
-          className="w-full rounded-full border border-gray-300 px-4 py-3 pr-12 text-sm placeholder:text-[#bababa] focus:outline-none"
+          className="dz:w-full dz:rounded-full dz:border dz:border-gray-300 dz:px-4 dz:py-3 dz:pr-12 dz:text-sm dz:placeholder:text-[#bababa] focus:dz:outline-none"
         />
 
         <button
-          className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+          className="dz:absolute dz:right-2 dz:top-1/2 dz:-translate-y-1/2 dz:p-2 dz:text-gray-400 hover:dz:text-gray-600 dz:transition-colors dz:cursor-pointer"
           type="button"
           onClick={onSend}
         >
@@ -61,22 +61,22 @@ const WidgetFooter = ({
       </div>
 
       {config?.showBranding !== false && (
-        <div className="flex items-center gap-2 text-[10px] text-[#aeaeae] pt-2 -mb-2">
+        <div className="dz:flex dz:items-center dz:gap-2 dz:text-[10px] dz:text-[#aeaeae] dz:pt-2 dz:-mb-2">
           <p>Powered by</p>
           <a
             href="https://draz.chat"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-1 hover:opacity-80 transition-opacity"
+            className="dz:group dz:flex dz:items-center dz:gap-1 hover:dz:opacity-80 dz:transition-opacity"
           >
             <img
               src="https://widget.draz.chat/draz-favicon-light.svg"
               alt=""
               width={15}
               height={15}
-              className="grayscale-100 group-hover:grayscale-0"
+              className="dz:grayscale-100 group-hover:dz:grayscale-0"
             />
-            <p className="group-hover:text-blue-600">Draz.chat</p>
+            <p className="group-hover:dz:text-blue-600">Draz.chat</p>
           </a>
         </div>
       )}

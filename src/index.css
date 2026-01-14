@@ -1,12 +1,15 @@
 /* ============================================
    DRAZ WIDGET - MAIN STYLESHEET
    
-   Uses 'important' flag to ensure widget styles
-   override any host page styles
+   Uses prefix 'dz' for unique class names and
+   'important' flag to ensure widget styles override
+   any host page styles
+   
+   Class syntax: dz:rounded-lg, dz:p-4, etc.
    ============================================ */
 
-/* Framework - with important flag for style isolation */
-@import "tailwindcss" important;
+/* Framework - with prefix and important flag for complete isolation */
+@import "tailwindcss" prefix(dz) important;
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));

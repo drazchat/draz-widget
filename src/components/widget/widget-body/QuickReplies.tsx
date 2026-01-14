@@ -18,12 +18,12 @@ const QuickReplies = ({ quickReplies }: QuickRepliesProps) => {
   };
 
   return (
-    <div className="w-full flex flex-wrap gap-2 mt-2 justify-end">
+    <div className="dz:w-full dz:flex dz:flex-wrap dz:gap-2 dz:mt-2 dz:justify-end">
       {quickReplies.map((reply, index) => (
         <button
           key={index}
           onClick={() => handleClick(reply)}
-          className={`px-3 py-2 bg-white border border-[#e5e7eb] text-[#4b5563] rounded-full hover:bg-gray-100 hover:border-gray-300 transition-colors cursor-pointer ${getFontSizeClass(
+          className={`dz:px-3 dz:py-2 dz:bg-white dz:border dz:border-[#e5e7eb] dz:text-[#4b5563] dz:rounded-full hover:dz:bg-gray-100 hover:dz:border-gray-300 dz:transition-colors dz:cursor-pointer ${getFontSizeClass(
             config.fontSize
           )}`}
         >
