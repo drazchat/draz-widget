@@ -44,7 +44,7 @@ const WidgetFooter = ({
           onChange={(e) => onInputChange(e.target.value)}
           onKeyDown={onKeyDown}
           placeholder="Ask a question"
-          className="dz:w-full dz:rounded-full dz:border dz:border-gray-300 dz:px-4 dz:py-3 dz:pr-12 dz:text-sm dz:text-gray-700 dz:placeholder:text-[#bababa] focus:dz:outline-none"
+          className="dz:w-full dz:rounded-full dz:border dz:border-gray-300 dz:px-4 dz:py-3 dz:pr-12 dz:text-sm dz:text-gray-700 dz:placeholder:text-[#bababa] focus:dz:outline-none focus:dz:ring-0 focus:dz:shadow-none"
         />
 
         <button
