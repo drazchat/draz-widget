@@ -56,11 +56,12 @@ export const WidgetConfigProvider = ({ children }: { children: ReactNode }) => {
           return;
         }
 
-        const data: Partial<WidgetConfig> = await response.json();
+        const data = await response.json();
+        const apiConfig = data.config || {};
 
         // Merge with defaults (handles missing fields)
         setState({
-          config: { ...defaultWidgetConfig, ...data },
+          config: { ...defaultWidgetConfig, ...apiConfig },
           isConfigLoaded: true,
           isConfigError: false,
         });
