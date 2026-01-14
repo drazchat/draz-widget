@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import type { ReactNode } from "react";
 import { io, Socket } from "socket.io-client";
 import type { Message, MessageRichContent } from "./socket.types";
-import { SOCKET_URL, API_URL, WORKSPACE_ID } from "./socket.config";
+import { SOCKET_URL, API_URL, getWorkspaceId } from "./socket.config";
 import { SocketContext } from "./socket.context";
 import {
   STORAGE_KEYS,
@@ -180,7 +180,7 @@ export const SocketProvider = ({ children }: { children: ReactNode }) => {
       ...SOCKET_OPTIONS,
       query: {
         clientType: "web",
-        workspaceId: WORKSPACE_ID,
+        workspaceId: getWorkspaceId(),
         anonymousId,
       },
     });
