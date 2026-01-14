@@ -1,0 +1,5 @@
+{
+  "buildCommand": "pnpm run build:widget",
+  "outputDirectory": "dist-widget",
+  "framework": null
+}
