@@ -22,11 +22,11 @@ const CircleLauncher = memo(function CircleLauncher({
       className={`dz:cursor-pointer dz:flex dz:items-center dz:justify-center widget-size-${config.widgetSize}`}
     >
       <div
-        className={`dz:flex dz:items-center dz:justify-center dz:text-white dz:shadow-lg dz:transition-transform hover:dz:scale-105 ${animationClass}`}
+        className={`dz:flex dz:items-center dz:justify-center dz:text-white dz:transition-transform hover:dz:scale-105 ${animationClass} ${
+          config.widgetLauncherColor !== "" ? "dz:shadow-lg" : "dz:shadow-none"
+        }`}
         style={{
-          backgroundColor: config.widgetLauncherColor || config.primaryColor,
-          border: `2px solid ${config.widgetLauncherColor}`,
-          boxShadow: `0 0 0 2px ${config.widgetLauncherColor}`,
+          backgroundColor: config.widgetLauncherColor,
           borderRadius,
           height: "100%",
           width: "100%",
