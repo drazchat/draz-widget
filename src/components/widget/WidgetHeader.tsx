@@ -30,15 +30,39 @@ const WidgetHeader = ({
     return `linear-gradient(to right, ${config?.primaryColor}, ${config?.secondaryColor})`;
   }, [config?.primaryColor, config?.secondaryColor]);
 
-  // Determine button colors based on the effective background color
-  const buttonColors = useMemo(() => {
-    const effectiveColor =
-      config?.secondaryColor || config?.primaryColor || "#4f46e5";
-    const isDark = isColorDark(effectiveColor);
+  // Determine text and button colors
+  const headerColors = useMemo(() => {
+    const primary = config?.primaryColor || "";
+    const secondary = config?.secondaryColor;
+
+    // Check if primary is dark
+    const isPrimaryDark = isColorDark(primary);
+
+    // Check if secondary is dark (if it exists)
+    const isSecondaryDark = secondary ? isColorDark(secondary) : false;
+
+    // Title/Subtitle logic:
+    // If primary color is light => title/subtitle should be dark
+    // If primary color is dark => title/subtitle should be light
+    const isTitleLight = isPrimaryDark;
+
+    // Action Buttons logic:
+    // If secondary exists:
+    //   Use contrast of secondary color (Right side of gradient)
+    //   (Ignore primary color for buttons to avoid white-on-white in Dark->Light gradients)
+    // If secondary missing:
+    //   Use primary => if primary dark => light buttons
+    const isActionLight = secondary ? isSecondaryDark : isPrimaryDark;
+
     return {
-      text: isDark ? "text-white" : "text-gray-900",
-      subtitle: isDark ? "text-white/70" : "text-gray-500",
-      hover: isDark ? "hover:bg-white/15" : "hover:bg-black/10",
+      title: {
+        text: isTitleLight ? "text-white" : "text-gray-900",
+        subtitle: isTitleLight ? "text-white/70" : "text-black/70",
+      },
+      action: {
+        icon: isActionLight ? "text-white/50" : "text-black/50",
+        hover: isActionLight ? "hover:bg-white/15 hover:text-white" : "hover:bg-black/10 hover:text-black",
+      },
     };
   }, [config?.primaryColor, config?.secondaryColor]);
 
@@ -47,7 +71,7 @@ const WidgetHeader = ({
       className="flex h-18 items-center justify-between px-4 rounded-t-2xl overflow-hidden border-b border-gray-200"
       style={{ background: headerBackground }}
     >
-      <div className={`${buttonColors.text} flex items-center gap-3`}>
+      <div className={`${headerColors.title.text} flex items-center gap-3`}>
         <div className="rounded-full p-1 mt-1">
           <img
             src={config?.botAvatar || ""}
@@ -57,10 +81,10 @@ const WidgetHeader = ({
           />
         </div>
         <div>
-          <p className={`font-medium ${buttonColors.text} text-sm`}>
+          <p className={`font-medium ${headerColors.title.text} text-sm`}>
             {config?.botName}
           </p>
-          <p className={`text-xs ${buttonColors.subtitle}`}>
+          <p className={`text-xs ${headerColors.title.subtitle}`}>
             {config?.botSubtitle}
           </p>
         </div>
@@ -70,7 +94,7 @@ const WidgetHeader = ({
         {config?.showOptionsMenu !== false && (
           <DropdownMenu>
             <DropdownMenuTrigger
-              className={`${buttonColors.subtitle} ${buttonColors.hover} outline-none cursor-pointer transition-colors rounded-full p-1.5`}
+              className={`${headerColors.action.icon} ${headerColors.action.hover} outline-none cursor-pointer transition-colors rounded-full p-1.5`}
             >
               <EllipsisVertical size={18} strokeWidth={2} />
             </DropdownMenuTrigger>
@@ -93,7 +117,7 @@ const WidgetHeader = ({
 
         <button
           onClick={onClose}
-          className={`${buttonColors.subtitle} ${buttonColors.hover} cursor-pointer transition-colors rounded-full p-1.5`}
+          className={`${headerColors.action.icon} ${headerColors.action.hover} cursor-pointer transition-colors rounded-full p-1.5`}
         >
           <X size={18} strokeWidth={2} />
         </button>

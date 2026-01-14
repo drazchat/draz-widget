@@ -53,8 +53,8 @@ export interface WidgetConfig {
 
 // Default config (fallback if API fails)
 export const defaultWidgetConfig: WidgetConfig = {
-  primaryColor: "#011940",
-  secondaryColor: "#69a2ff",
+  primaryColor: "#034d00",
+  secondaryColor: "#bfffbd",
   showHomeButton: true,
   showOptionsMenu: true,
   showBranding: true,
