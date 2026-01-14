@@ -35,7 +35,7 @@ const LauncherTooltip = ({
           align={config.widgetPosition === "left" ? "start" : "end"}
           sideOffset={8}
         >
-          <p className="dz:text-xs">{truncatedMessage}</p>
+          <p className="text-xs">{truncatedMessage}</p>
         </TooltipContent>
       )}
     </Tooltip>

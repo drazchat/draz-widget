@@ -15,15 +15,20 @@ function PopoverTrigger({
   return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />;
 }
 
+import { useShadowRoot } from "@/context";
+
 function PopoverContent({
   className,
   align = "center",
   sideOffset = 4,
   ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Content>) {
+  const { shadowRoot } = useShadowRoot();
   return (
     <PopoverPrimitive.Portal
-      container={document.getElementById("draz-widget-root") ?? document.body}
+      container={
+        shadowRoot?.getElementById("draz-widget-root") ?? document.body
+      }
     >
       <PopoverPrimitive.Content
         data-slot="popover-content"

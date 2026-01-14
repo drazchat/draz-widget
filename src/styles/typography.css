@@ -1,29 +1,28 @@
-/* Custom font size utilities with dz prefix for CSS isolation */
-.dz\:font-xs {
+.font-xs {
   font-size: 11px !important;
   line-height: 21px !important;
 }
-.dz\:font-sm {
+.font-sm {
   font-size: 12px !important;
   line-height: 21px !important;
 }
-.dz\:font-md {
+.font-md {
   font-size: 12.5px !important;
   line-height: 21px !important;
 }
-.dz\:font-lg {
+.font-lg {
   font-size: 13px !important;
   line-height: 22px !important;
 }
-.dz\:font-xl {
+.font-xl {
   font-size: 13.5px !important;
   line-height: 22px !important;
 }
-.dz\:font-2xl {
+.font-2xl {
   font-size: 14px !important;
   line-height: 22px !important;
 }
-.dz\:font-3xl {
+.font-3xl {
   font-size: 14.5px !important;
   line-height: 22px !important;
 }

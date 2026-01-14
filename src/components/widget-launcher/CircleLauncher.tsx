@@ -19,11 +19,11 @@ const CircleLauncher = memo(function CircleLauncher({
   return (
     <div
       onClick={onClick}
-      className={`dz:cursor-pointer dz:flex dz:items-center dz:justify-center widget-size-${config.widgetSize}`}
+      className={`cursor-pointer flex items-center justify-center widget-size-${config.widgetSize}`}
     >
       <div
-        className={`dz:flex dz:items-center dz:justify-center dz:text-white dz:transition-transform hover:dz:scale-105 ${animationClass} ${
-          config.widgetLauncherColor !== "" ? "dz:shadow-lg" : "dz:shadow-none"
+        className={`flex items-center justify-center text-white transition-transform hover:scale-105 ${animationClass} ${
+          config.widgetLauncherColor !== "" ? "shadow-lg" : "shadow-none"
         }`}
         style={{
           backgroundColor: config.widgetLauncherColor,

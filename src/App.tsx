@@ -10,8 +10,8 @@ import {
 
 // Position class mapping for O(1) lookup
 const POSITION_CLASSES = {
-  left: "dz:left-6",
-  right: "dz:right-6",
+  left: "left-6",
+  right: "right-6",
 } as const;
 // =============================================================================
 // Error Boundary - Catches runtime errors in widget tree
@@ -79,7 +79,7 @@ const WidgetContainer = memo(function WidgetContainer() {
   return (
     <SocketProvider>
       <div
-        className={`dz:fixed dz:z-50 dz:flex dz:flex-col dz:items-end dz:gap-4 dz:bottom-6 ${positionClass}`}
+        className={`fixed z-50 flex flex-col items-end gap-4 bottom-6 ${positionClass}`}
         role="complementary"
         aria-label="Chat widget"
       >

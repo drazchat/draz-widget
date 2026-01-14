@@ -15,7 +15,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
-import "./index.css";
+import styles from "./index.css?inline";
+import { ShadowRootProvider } from "./context";
 
 // Get the current script tag to read data attributes
 function getCurrentScript(): HTMLScriptElement | null {
@@ -51,29 +52,60 @@ function getWidgetConfig(): { workspaceId: string } {
   return { workspaceId };
 }
 
-// Create isolated container for the widget
-function createWidgetContainer(): HTMLDivElement {
-  const containerId = "draz-widget-root";
+// Create isolated Shadow DOM container for the widget
+function createWidgetContainer(): {
+  container: HTMLDivElement;
+  shadowRoot: ShadowRoot;
+} {
+  const hostId = "draz-widget-host";
 
-  // Check if container already exists (prevent duplicate initialization)
-  let container = document.getElementById(containerId) as HTMLDivElement;
-  if (container) {
-    return container;
+  // Check if host already exists (prevent duplicate initialization)
+  let host = document.getElementById(hostId) as HTMLDivElement;
+  if (host && host.shadowRoot) {
+    const container = host.shadowRoot.getElementById(
+      "draz-widget-root"
+    ) as HTMLDivElement;
+    return { container, shadowRoot: host.shadowRoot };
   }
 
-  // Create new container
-  container = document.createElement("div");
-  container.id = containerId;
+  // Create new host element
+  if (!host) {
+    host = document.createElement("div");
+    host.id = hostId;
+    // Host ensures it's on top of everything
+    host.style.cssText = `
+      position: fixed;
+      z-index: 2147483647;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      overflow: visible;
+    `;
+    document.body.appendChild(host);
+  }
 
-  // Reset any inherited styles
+  // Attach Shadow DOM
+  const shadowRoot = host.attachShadow({ mode: "open" });
+
+  // Inject Styles
+  const styleElement = document.createElement("style");
+  styleElement.textContent = styles;
+  shadowRoot.appendChild(styleElement);
+
+  // Create app container inside Shadow DOM
+  const container = document.createElement("div");
+  container.id = "draz-widget-root";
+
+  // Important: The container needs to be the font root
   container.style.cssText = `
-    position: fixed;
-    z-index: 2147483647;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
   `;
 
-  document.body.appendChild(container);
-  return container;
+  shadowRoot.appendChild(container);
+
+  return { container, shadowRoot };
 }
 
 // Store config globally for context providers to access
@@ -92,11 +124,13 @@ function initWidget(): void {
   // Store config globally for providers to access
   window.__DRAZ_WIDGET_CONFIG__ = config;
 
-  const container = createWidgetContainer();
+  const { container, shadowRoot } = createWidgetContainer();
 
   createRoot(container).render(
     <StrictMode>
-      <App />
+      <ShadowRootProvider shadowRoot={shadowRoot}>
+        <App />
+      </ShadowRootProvider>
     </StrictMode>
   );
 }

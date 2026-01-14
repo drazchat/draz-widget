@@ -9,18 +9,18 @@ const TypingIndicator = memo(function TypingIndicator({
   botAvatar,
 }: TypingIndicatorProps) {
   return (
-    <div className="dz:self-start dz:max-w-[80%] dz:my-2">
-      <div className="dz:flex dz:items-start dz:gap-2">
-        <div className="dz:bg-gray-100 dz:text-gray-900 dz:py-4 dz:px-4 dz:rounded-lg dz:text-sm">
-          <BotAvatar src={botAvatar || ""} className="dz:-mt-6 dz:-ml-6" />
-          <div className="dz:flex dz:items-center dz:gap-1 dz:px-1">
-            <span className="dz:w-1 dz:h-1 dz:bg-gray-400 dz:rounded-full dz:animate-typing-dot" />
+    <div className="self-start max-w-[80%] my-2">
+      <div className="flex items-start gap-2">
+        <div className="bg-gray-100 text-gray-900 py-4 px-4 rounded-lg text-sm">
+          <BotAvatar src={botAvatar || ""} className="-mt-6 -ml-6" />
+          <div className="flex items-center gap-1 px-1">
+            <span className="w-1 h-1 bg-gray-400 rounded-full animate-typing-dot" />
             <span
-              className="dz:w-1 dz:h-1 dz:bg-gray-400 dz:rounded-full dz:animate-typing-dot"
+              className="w-1 h-1 bg-gray-400 rounded-full animate-typing-dot"
               style={{ animationDelay: "0.2s" }}
             />
             <span
-              className="dz:w-1 dz:h-1 dz:bg-gray-400 dz:rounded-full dz:animate-typing-dot"
+              className="w-1 h-1 bg-gray-400 rounded-full animate-typing-dot"
               style={{ animationDelay: "0.4s" }}
             />
           </div>

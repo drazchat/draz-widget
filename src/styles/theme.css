@@ -30,7 +30,8 @@
 }
 
 /* Light mode custom properties */
-:root {
+:root,
+:host {
   --radius: 0.625rem;
 
   /* Core */
@@ -57,7 +58,8 @@
 }
 
 /* Dark mode custom properties */
-.dark {
+.dark,
+:host(.dark) {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --primary: oklch(0.922 0 0);

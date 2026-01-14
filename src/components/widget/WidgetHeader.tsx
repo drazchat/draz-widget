@@ -36,19 +36,19 @@ const WidgetHeader = ({
       config?.secondaryColor || config?.primaryColor || "#4f46e5";
     const isDark = isColorDark(effectiveColor);
     return {
-      text: isDark ? "dz:text-white" : "dz:text-gray-900",
-      subtitle: isDark ? "dz:text-white/70" : "dz:text-gray-500",
-      hover: isDark ? "hover:dz:bg-white/15" : "hover:dz:bg-black/10",
+      text: isDark ? "text-white" : "text-gray-900",
+      subtitle: isDark ? "text-white/70" : "text-gray-500",
+      hover: isDark ? "hover:bg-white/15" : "hover:bg-black/10",
     };
   }, [config?.primaryColor, config?.secondaryColor]);
 
   return (
     <div
-      className="dz:flex dz:h-18 dz:items-center dz:justify-between dz:px-4 dz:rounded-t-2xl dz:overflow-hidden dz:border-b dz:border-gray-200"
+      className="flex h-18 items-center justify-between px-4 rounded-t-2xl overflow-hidden border-b border-gray-200"
       style={{ background: headerBackground }}
     >
-      <div className={`${buttonColors.text} dz:flex dz:items-center dz:gap-3`}>
-        <div className="dz:rounded-full dz:p-1 dz:mt-1">
+      <div className={`${buttonColors.text} flex items-center gap-3`}>
+        <div className="rounded-full p-1 mt-1">
           <img
             src={config?.botAvatar || ""}
             alt="Bot Avatar"
@@ -57,25 +57,25 @@ const WidgetHeader = ({
           />
         </div>
         <div>
-          <p className={`dz:font-medium ${buttonColors.text} dz:text-sm`}>
+          <p className={`font-medium ${buttonColors.text} text-sm`}>
             {config?.botName}
           </p>
-          <p className={`dz:text-xs ${buttonColors.subtitle}`}>
+          <p className={`text-xs ${buttonColors.subtitle}`}>
             {config?.botSubtitle}
           </p>
         </div>
       </div>
 
-      <div className="dz:flex dz:items-center dz:gap-2">
+      <div className="flex items-center gap-2">
         {config?.showOptionsMenu !== false && (
           <DropdownMenu>
             <DropdownMenuTrigger
-              className={`${buttonColors.subtitle} ${buttonColors.hover} dz:outline-none dz:cursor-pointer dz:transition-colors dz:rounded-full dz:p-1.5`}
+              className={`${buttonColors.subtitle} ${buttonColors.hover} outline-none cursor-pointer transition-colors rounded-full p-1.5`}
             >
               <EllipsisVertical size={18} strokeWidth={2} />
             </DropdownMenuTrigger>
             <DropdownMenuContent
-              className="dz:w-[280px]"
+              className="w-[280px]"
               sideOffset={5}
               align="end"
             >
@@ -93,7 +93,7 @@ const WidgetHeader = ({
 
         <button
           onClick={onClose}
-          className={`${buttonColors.subtitle} ${buttonColors.hover} dz:cursor-pointer dz:transition-colors dz:rounded-full dz:p-1.5`}
+          className={`${buttonColors.subtitle} ${buttonColors.hover} cursor-pointer transition-colors rounded-full p-1.5`}
         >
           <X size={18} strokeWidth={2} />
         </button>

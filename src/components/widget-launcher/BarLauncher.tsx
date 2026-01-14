@@ -14,7 +14,7 @@ const BarLauncher = memo(function BarLauncher({
   return (
     <div
       onClick={onClick}
-      className="dz:flex dz:items-center dz:gap-3 dz:p-3 dz:border dz:rounded-xl dz:shadow-lg dz:cursor-pointer hover:dz:scale-[1.02] dz:transition-transform"
+      className="flex items-center gap-3 p-3 border rounded-xl shadow-lg cursor-pointer hover:scale-[1.02] transition-transform"
       style={{
         backgroundColor: config.widgetLauncherColor,
         minWidth: BAR_LAUNCHER_WIDTH,
@@ -26,18 +26,18 @@ const BarLauncher = memo(function BarLauncher({
         <img
           src={config.botAvatar || ""}
           alt="Bot Avatar"
-          className="dz:w-12 dz:h-12 dz:rounded-full dz:object-cover"
+          className="w-12 h-12 rounded-full object-cover"
         />
       </div>
 
       {/* Text content */}
-      <div className="dz:flex dz:flex-col dz:min-w-0 dz:flex-1">
+      <div className="flex flex-col min-w-0 flex-1">
         <p
-          className={`dz:font-semibold dz:text-sm dz:truncate ${buttonColors.text}`}
+          className={`font-semibold text-sm truncate ${buttonColors.text}`}
         >
           {config.botName}
         </p>
-        <p className={`dz:text-xs dz:truncate ${buttonColors.subtitle}`}>
+        <p className={`text-xs truncate ${buttonColors.subtitle}`}>
           Hello, how can I help you today?
         </p>
       </div>

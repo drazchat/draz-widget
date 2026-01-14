@@ -12,10 +12,10 @@ import MessageStatus from "./components/MessageStatus";
 
 // Loading spinner component
 const LoadingSpinner = () => (
-  <div className="dz:flex-1 dz:bg-white dz:flex dz:items-center dz:justify-center">
-    <div className="dz:flex dz:flex-col dz:items-center dz:gap-3">
-      <div className="dz:w-8 dz:h-8 dz:border-4 dz:border-indigo-200 dz:border-t-indigo-600 dz:rounded-full dz:animate-spin" />
-      <p className="dz:text-sm dz:text-gray-500">Loading messages...</p>
+  <div className="flex-1 bg-white flex items-center justify-center">
+    <div className="flex flex-col items-center gap-3">
+      <div className="w-8 h-8 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
+      <p className="text-sm text-gray-500">Loading messages...</p>
     </div>
   </div>
 );
@@ -71,7 +71,7 @@ const WidgetBody = () => {
 
   return (
     <div
-      className="dz:flex-1 dz:bg-white dz:px-4 dz:pb-4 dz:overflow-y-auto dz:scroll-auto dz:flex dz:flex-col"
+      className="flex-1 bg-white px-4 pb-4 overflow-y-auto scroll-auto flex flex-col"
       style={{ WebkitOverflowScrolling: "touch" }}
     >
       {/* Messages */}
@@ -86,7 +86,7 @@ const WidgetBody = () => {
           return (
             <Fragment key={msg.id}>
               {isNewDay && <DateSeparator date={msg.timestamp} />}
-              <div className="dz:self-center dz:text-gray-400 dz:text-xs dz:italic dz:mb-3">
+              <div className="self-center text-gray-400 text-xs italic mb-3">
                 {msg.text}
               </div>
             </Fragment>
@@ -98,9 +98,9 @@ const WidgetBody = () => {
           return (
             <Fragment key={msg.id}>
               {isNewDay && <DateSeparator date={msg.timestamp} />}
-              <div className="dz:self-end dz:max-w-[80%] dz:mb-1">
+              <div className="self-end max-w-[80%] mb-1">
                 <div
-                  className={`dz:px-4 dz:py-3 dz:rounded-xl dz:rounded-br-none ${getFontSizeClass(
+                  className={`px-4 py-3 rounded-xl rounded-br-none ${getFontSizeClass(
                     config.fontSize
                   )}`}
                   style={{
@@ -126,20 +126,20 @@ const WidgetBody = () => {
         return (
           <Fragment key={msg.id}>
             {isNewDay && <DateSeparator date={msg.timestamp} />}
-            <div className="dz:self-start dz:max-w-[80%] dz:mb-1">
-              <div className="dz:flex dz:items-start dz:gap-2">
+            <div className="self-start max-w-[80%] mb-1">
+              <div className="flex items-start gap-2">
                 <div
-                  className={`dz:bg-gray-100 dz:text-gray-700 dz:py-3 dz:px-4 dz:rounded-lg ${getFontSizeClass(
+                  className={`bg-gray-100 text-gray-700 py-3 px-4 rounded-lg ${getFontSizeClass(
                     config.fontSize
                   )}`}
                 >
                   {isFirstInGroup ? (
                     <BotAvatar
                       src={config.botAvatar || ""}
-                      className="dz:-mt-6 dz:-ml-6"
+                      className="-mt-6 -ml-6"
                     />
                   ) : (
-                    <div className="dz:w-6 dz:shrink-0" />
+                    <div className="w-6 shrink-0" />
                   )}
                   {msg.text}
                 </div>
@@ -147,14 +147,14 @@ const WidgetBody = () => {
 
               {/* Cards */}
               {msg.cards && msg.cards.length > 0 && (
-                <div className="dz:self-start">
+                <div className="self-start">
                   <Cards cards={msg.cards} />
                 </div>
               )}
 
               {/* Timestamp */}
               {isLastInGroup && (
-                <div className="dz:ml-0 dz:mt-1 dz:text-[10px] dz:text-gray-400">
+                <div className="ml-0 mt-1 text-[10px] text-gray-400">
                   {formatTime(msg.timestamp)}
                 </div>
               )}
@@ -164,7 +164,7 @@ const WidgetBody = () => {
             {msg.quickReplies &&
               msg.quickReplies.length > 0 &&
               index === messages.length - 1 && (
-                <div className="dz:self-end dz:w-4/5">
+                <div className="self-end w-4/5">
                   <QuickReplies quickReplies={msg.quickReplies} />
                 </div>
               )}

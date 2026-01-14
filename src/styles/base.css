@@ -1,10 +1,10 @@
 /* Base styles and resets */
 @layer base {
   * {
-    @apply dz:border-border dz:outline-ring/50;
+    @apply border-border outline-ring/50 border-solid;
   }
   body {
-    @apply dz:bg-background dz:text-foreground;
+    @apply bg-background text-foreground;
     font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
       "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-weight: 400;
