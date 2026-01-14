@@ -47,9 +47,11 @@ export const parseApiMessage = (msg: ApiMessage): Message => {
     for (const item of msg.content) {
       switch (item.type) {
         case "carousel":
+        case "cards":
           if (item.data) cards = item.data;
           break;
         case "quick_replies":
+        case "quickReplies":
           quickReplies = item.data || item.quickReplies;
           break;
         case "video":

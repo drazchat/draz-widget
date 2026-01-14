@@ -79,6 +79,7 @@ export interface ApiContentItem {
     | "carousel"
     | "quickReplies"
     | "quick_replies"
+    | "cards"
     | "video"
     | "image"
     | "attachment";
