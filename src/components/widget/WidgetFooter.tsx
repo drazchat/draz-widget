@@ -74,9 +74,9 @@ const WidgetFooter = ({
               alt=""
               width={15}
               height={15}
-              className="dz:grayscale-100 group-hover:dz:grayscale-0"
+              className="dz:grayscale-100 dz:group-hover:grayscale-0"
             />
-            <p className="dz:text-[#aeaeae] group-hover:dz:text-blue-600">
+            <p className="dz:text-[#aeaeae] dz:group-hover:text-blue-600">
               Draz.chat
             </p>
           </a>
