@@ -2,6 +2,15 @@
 // Uses Vite environment variables with development fallbacks
 // In embed mode, reads from window.__DRAZ_WIDGET_CONFIG__ set by widget.entry.tsx
 
+// Global type declaration for embed mode config
+declare global {
+  interface Window {
+    __DRAZ_WIDGET_CONFIG__?: {
+      workspaceId: string;
+    };
+  }
+}
+
 /** Socket.io server URL */
 export const SOCKET_URL =
   import.meta.env.VITE_SOCKET_URL || "https://api.draz.chat";

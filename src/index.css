@@ -1,9 +1,12 @@
 /* ============================================
    DRAZ WIDGET - MAIN STYLESHEET
+   
+   Uses 'important' flag to ensure widget styles
+   override any host page styles
    ============================================ */
 
-/* Framework */
-@import "tailwindcss";
+/* Framework - with important flag for style isolation */
+@import "tailwindcss" important;
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
