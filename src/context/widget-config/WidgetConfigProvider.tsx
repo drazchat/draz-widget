@@ -2,11 +2,8 @@ import { useEffect, useState, useMemo } from "react";
 import type { ReactNode } from "react";
 import type { WidgetConfig } from "./widget-config.types";
 import { defaultWidgetConfig } from "./widget-config.types";
-import { API_URL, WORKSPACE_ID } from "../socket/socket.config";
+import { API_URL, getWorkspaceId } from "../socket/socket.config";
 import { WidgetConfigContext } from "./widget-config.context";
-
-// Endpoint constant - avoids string recreation on each render
-const CONFIG_ENDPOINT = `${API_URL}/widget/config/${WORKSPACE_ID}`;
 
 // Consolidated state type for single atomic updates
 interface ConfigState {
@@ -28,8 +25,23 @@ export const WidgetConfigProvider = ({ children }: { children: ReactNode }) => {
     const controller = new AbortController();
 
     const fetchConfig = async () => {
+      // Get workspace ID at runtime (after widget.entry.tsx sets global config)
+      const workspaceId = getWorkspaceId();
+
+      if (!workspaceId) {
+        console.error("[WidgetConfig] No workspace ID available");
+        setState((prev) => ({
+          ...prev,
+          isConfigLoaded: true,
+          isConfigError: true,
+        }));
+        return;
+      }
+
+      const endpoint = `${API_URL}/widget/config/${workspaceId}`;
+
       try {
-        const response = await fetch(CONFIG_ENDPOINT, {
+        const response = await fetch(endpoint, {
           signal: controller.signal,
           headers: { Accept: "application/json" },
         });

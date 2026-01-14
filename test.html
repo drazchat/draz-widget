@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draz Widget Test</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        padding: 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      h1 {
+        color: #333;
+      }
+      p {
+        color: #666;
+        line-height: 1.6;
+      }
+      code {
+        background: #f4f4f4;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+      }
+      .info-box {
+        background: #e7f5ff;
+        border-left: 4px solid #339af0;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Draz Widget Test Page</h1>
+    <p>
+      This page tests the embeddable chat widget. The widget should appear in
+      the bottom-right corner of the screen.
+    </p>
+
+    <div class="info-box">
+      <strong>How to test:</strong>
+      <ol>
+        <li>
+          Run <code>pnpm run build:widget</code> to build the widget bundle
+        </li>
+        <li>Open this file with Live Server or any local server</li>
+        <li>The chat widget launcher should appear in the corner</li>
+      </ol>
+    </div>
+
+    <p>
+      The widget is initialized with workspace ID:
+      <code>01KCHM31DQSRE3QAH3QT5STQF3</code>
+    </p>
+
+    <!-- Draz Chat Widget -->
+    <script
+      src="https://widget.draz.chat/draz-widget.js"
+      data-workspace-id="01KCHM31DQSRE3QAH3QT5STQF3"
+    ></script>
+  </body>
+</html>
