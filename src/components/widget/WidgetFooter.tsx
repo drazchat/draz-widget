@@ -70,7 +70,7 @@ const WidgetFooter = ({
             className="group flex items-center gap-1 hover:opacity-80 transition-opacity"
           >
             <img
-              src="/draz-favicon-light.svg"
+              src="https://widget.draz.chat/draz-favicon-light.svg"
               alt=""
               width={15}
               height={15}
