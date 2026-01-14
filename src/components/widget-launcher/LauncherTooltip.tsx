@@ -17,7 +17,6 @@ const LauncherTooltip = ({
   onOpenChange,
   children,
 }: LauncherTooltipProps) => {
-  console.log("LauncherTooltip render", { showTooltip, message });
   const truncatedMessage =
     message && message.length > TOOLTIP_MAX_LENGTH
       ? `${message.slice(0, TOOLTIP_MAX_LENGTH)}...`
