@@ -41,7 +41,9 @@ function TooltipContent({
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Content>) {
   return (
-    <TooltipPrimitive.Portal>
+    <TooltipPrimitive.Portal
+      container={document.getElementById("draz-widget-root") ?? document.body}
+    >
       <TooltipPrimitive.Content
         data-slot="tooltip-content"
         sideOffset={sideOffset}
