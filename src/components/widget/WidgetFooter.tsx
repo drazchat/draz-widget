@@ -61,7 +61,7 @@ const WidgetFooter = ({
       </div>
 
       {config?.showBranding !== false && (
-        <div className="dz:flex dz:items-center dz:gap-2 dz:text-[10px] dz:text-[#aeaeae] dz:pt-2 dz:-mb-2">
+        <div className="dz:flex dz:items-center dz:gap-2 dz:text-[10px] !dz:text-[#aeaeae] dz:pt-2 dz:-mb-2">
           <p>Powered by</p>
           <a
             href="https://draz.chat"

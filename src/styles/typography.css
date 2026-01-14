@@ -1,31 +1,31 @@
-/* Custom font size utilities */
-.font-xs {
-  font-size: 11px;
-  line-height: 21px;
+/* Custom font size utilities with dz prefix for CSS isolation */
+.dz\:font-xs {
+  font-size: 11px !important;
+  line-height: 21px !important;
 }
-.font-sm {
-  font-size: 12px;
-  line-height: 21px;
+.dz\:font-sm {
+  font-size: 12px !important;
+  line-height: 21px !important;
 }
-.font-md {
-  font-size: 12.5px;
-  line-height: 21px;
+.dz\:font-md {
+  font-size: 12.5px !important;
+  line-height: 21px !important;
 }
-.font-lg {
-  font-size: 13px;
-  line-height: 22px;
+.dz\:font-lg {
+  font-size: 13px !important;
+  line-height: 22px !important;
 }
-.font-xl {
-  font-size: 13.5px;
-  line-height: 22px;
+.dz\:font-xl {
+  font-size: 13.5px !important;
+  line-height: 22px !important;
 }
-.font-2xl {
-  font-size: 14px;
-  line-height: 22px;
+.dz\:font-2xl {
+  font-size: 14px !important;
+  line-height: 22px !important;
 }
-.font-3xl {
-  font-size: 14.5px;
-  line-height: 22px;
+.dz\:font-3xl {
+  font-size: 14.5px !important;
+  line-height: 22px !important;
 }
 
 /* Custom widget size utilities */
