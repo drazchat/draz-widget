@@ -23,7 +23,7 @@ const WidgetFooter = ({
       className="flex flex-col pb-4 items-center justify-between px-4 pt-4 border-t border-gray-100 w-full bg-white"
       style={{ boxShadow: "0 0 1px rgba(0, 0, 0, 0.1)" }}
     >
-      <div className="relative w-full flex gap-2 items-center">
+      <div className="w-full flex gap-2 items-center">
         {config?.showHomeButton !== false && (
           <div className="cursor-pointer" onClick={onRestartConversation}>
             <svg
@@ -41,26 +41,28 @@ const WidgetFooter = ({
           </div>
         )}
 
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => onInputChange(e.target.value)}
-          onKeyDown={onKeyDown}
-          placeholder="Ask a question"
-          className="w-full rounded-full border border-gray-300 px-4 py-3 pr-12 text-sm text-gray-700 placeholder:text-[#bababa] focus:outline-none focus:ring-0 focus:shadow-none"
-        />
+        <div className="relative flex-1">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => onInputChange(e.target.value)}
+            onKeyDown={onKeyDown}
+            placeholder="Ask a question"
+            className="w-full rounded-full border border-gray-300 px-4 py-3 pr-12 text-sm text-gray-700 placeholder:text-[#bababa] focus:outline-none focus:ring-0 focus:shadow-none"
+          />
 
-        <button
-          className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
-          type="button"
-          onClick={onSend}
-        >
-          {inputValue.trim() ? (
-            <SendHorizonal size={18} strokeWidth={2} />
-          ) : (
-            <Paperclip size={18} strokeWidth={2} />
-          )}
-        </button>
+          <button
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+            type="button"
+            onClick={onSend}
+          >
+            {inputValue.trim() ? (
+              <SendHorizonal size={18} strokeWidth={2} />
+            ) : (
+              <Paperclip size={18} strokeWidth={2} />
+            )}
+          </button>
+        </div>
       </div>
 
       {config?.showBranding !== false && (
