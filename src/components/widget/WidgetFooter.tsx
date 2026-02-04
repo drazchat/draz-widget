@@ -51,7 +51,7 @@ const WidgetFooter = ({
         />
 
         <button
-          className="absolute right-2  -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+          className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
           type="button"
           onClick={onSend}
         >
