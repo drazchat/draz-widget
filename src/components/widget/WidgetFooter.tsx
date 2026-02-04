@@ -41,18 +41,18 @@ const WidgetFooter = ({
           </div>
         )}
 
-        <div className="relative flex-1">
+        <div className="flex-1 flex items-center rounded-full border border-gray-300 bg-white px-4 py-2 focus-within:ring-1 focus-within:ring-blue-500/20 focus-within:border-blue-400 transition-all">
           <input
             type="text"
             value={inputValue}
             onChange={(e) => onInputChange(e.target.value)}
             onKeyDown={onKeyDown}
             placeholder="Ask a question"
-            className="w-full rounded-full border border-gray-300 px-4 py-3 pr-12 text-sm text-gray-700 placeholder:text-[#bababa] focus:outline-none focus:ring-0 focus:shadow-none"
+            className="flex-1 min-w-0 bg-transparent border-none p-0 text-sm text-gray-700 placeholder:text-[#bababa] focus:outline-none focus:ring-0 focus:shadow-none"
           />
 
           <button
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+            className="ml-2 p-1 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer shrink-0"
             type="button"
             onClick={onSend}
           >
