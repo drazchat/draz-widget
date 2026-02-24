@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:widget": "tsc -b && vite build --config vite.widget.config.ts",
+    "build:widget": "tsc -b && vite build --config vite.widget.config.ts && cp -r public/widget-preview dist-widget/widget-preview",
     "lint": "eslint .",
     "preview": "vite preview"
   },
