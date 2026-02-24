@@ -27,7 +27,7 @@ function getCurrentScript(): HTMLScriptElement | null {
 
   // Fallback: find our script by src
   const scripts = document.querySelectorAll(
-    'script[src*="draz-widget"]'
+    'script[src*="draz-widget"]',
   ) as NodeListOf<HTMLScriptElement>;
   return scripts[scripts.length - 1] || null;
 }
@@ -41,11 +41,12 @@ function getWidgetConfig(): { workspaceId: string } {
     return { workspaceId: "" };
   }
 
-  const workspaceId = script.dataset.workspaceId || "";
+  const workspaceId =
+    script.dataset.chatbotId || script.dataset.workspaceId || "";
 
   if (!workspaceId) {
     console.warn(
-      "[DrazWidget] No workspace ID provided. Add data-workspace-id to the script tag."
+      "[DrazWidget] No workspace ID provided. Add data-chatbot-id to the script tag.",
     );
   }
 
@@ -63,7 +64,7 @@ function createWidgetContainer(): {
   let host = document.getElementById(hostId) as HTMLDivElement;
   if (host && host.shadowRoot) {
     const container = host.shadowRoot.getElementById(
-      "draz-widget-root"
+      "draz-widget-root",
     ) as HTMLDivElement;
     return { container, shadowRoot: host.shadowRoot };
   }
@@ -131,7 +132,7 @@ function initWidget(): void {
       <ShadowRootProvider shadowRoot={shadowRoot}>
         <App />
       </ShadowRootProvider>
-    </StrictMode>
+    </StrictMode>,
   );
 }
 
