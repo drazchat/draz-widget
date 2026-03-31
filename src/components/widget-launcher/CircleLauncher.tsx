@@ -14,7 +14,10 @@ const CircleLauncher = memo(function CircleLauncher({
     ? ANIMATION_CLASSES[config.launcherAnimation]
     : "";
 
-  const borderRadius = config.widgetLauncherShape === "circle" ? "50%" : "4px";
+  const isCircle = config.widgetLauncherShape === "circle";
+  const borderRadius = isCircle ? "50%" : "0";
+  const launcherImage = config.widgetIcon || config.botAvatar || "";
+  const usesCustomIcon = Boolean(config.widgetIcon);
 
   return (
     <div
@@ -29,14 +32,22 @@ const CircleLauncher = memo(function CircleLauncher({
           backgroundColor: config.widgetLauncherColor,
           borderRadius,
           height: "100%",
+          overflow: "hidden",
           width: "100%",
         }}
       >
-        {config.widgetIcon ? (
-          <img src={config.widgetIcon} alt="Widget Icon" />
-        ) : (
-          <img src={config.botAvatar || ""} alt="Widget Icon" />
-        )}
+        <img
+          src={launcherImage}
+          alt="Widget Icon"
+          style={{
+            borderRadius,
+            display: "block",
+            height: "100%",
+            objectFit: usesCustomIcon ? "contain" : "cover",
+            padding: usesCustomIcon ? "18%" : "0",
+            width: "100%",
+          }}
+        />
       </div>
     </div>
   );
