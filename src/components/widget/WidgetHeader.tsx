@@ -15,12 +15,15 @@ interface WidgetHeaderProps {
   config?: WidgetConfig;
   onClose: () => void;
   onRestartConversation: () => void;
+  /** Inline (full-page) embeds have nothing to close into */
+  hideClose?: boolean;
 }
 
 const WidgetHeader = ({
   config,
   onClose,
   onRestartConversation,
+  hideClose = false,
 }: WidgetHeaderProps) => {
   // Compute header background based on color props
   const headerBackground = useMemo(() => {
@@ -72,14 +75,21 @@ const WidgetHeader = ({
       style={{ background: headerBackground }}
     >
       <div className={`${headerColors.title.text} flex items-center gap-3`}>
-        <div className="rounded-full p-1 mt-1">
-          <img
-            src={config?.botAvatar || ""}
-            alt="Bot Avatar"
-            width={40}
-            height={40}
-          />
-        </div>
+        {config?.botAvatar ? (
+          <div className="rounded-full p-1 mt-1">
+            <img
+              src={config.botAvatar}
+              alt=""
+              width={40}
+              height={40}
+              onError={(e) => {
+                // Broken avatar URL: collapse instead of a broken-image icon.
+                (e.currentTarget.parentElement as HTMLElement).style.display =
+                  "none";
+              }}
+            />
+          </div>
+        ) : null}
         <div>
           <p className={`font-medium ${headerColors.title.text} text-sm`}>
             {config?.botName}
@@ -115,12 +125,14 @@ const WidgetHeader = ({
           </DropdownMenu>
         )}
 
-        <button
-          onClick={onClose}
-          className={`${headerColors.action.icon} ${headerColors.action.hover} cursor-pointer transition-colors rounded-full p-1.5`}
-        >
-          <X size={18} strokeWidth={2} />
-        </button>
+        {!hideClose && (
+          <button
+            onClick={onClose}
+            className={`${headerColors.action.icon} ${headerColors.action.hover} cursor-pointer transition-colors rounded-full p-1.5`}
+          >
+            <X size={18} strokeWidth={2} />
+          </button>
+        )}
       </div>
     </div>
   );

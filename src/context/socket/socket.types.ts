@@ -59,7 +59,7 @@ export interface Message {
   text: string;
   type: "user" | "bot" | "system";
   timestamp: Date;
-  status?: "sending" | "sent";
+  status?: "sending" | "sent" | "failed";
   richContent?: RichContent;
   // Legacy fields for backward compatibility
   quickReplies?: QuickReply[];

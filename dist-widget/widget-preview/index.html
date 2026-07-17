@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draz Widget Preview</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        min-height: 100vh;
+        background: #000;
+        color: #fff;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem;
+      }
+      h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .subtitle {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 0.85rem;
+      }
+      .input-row {
+        display: flex;
+        gap: 0.75rem;
+        width: 100%;
+        max-width: 32rem;
+      }
+      input {
+        flex: 1;
+        height: 2.75rem;
+        padding: 0 1rem;
+        border-radius: 0.75rem;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+        font-size: 0.875rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      input::placeholder {
+        color: rgba(255, 255, 255, 0.25);
+      }
+      input:focus {
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+      button {
+        height: 2.75rem;
+        padding: 0 1.5rem;
+        border-radius: 0.75rem;
+        background: #fff;
+        color: #000;
+        font-weight: 600;
+        font-size: 0.875rem;
+        border: none;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      button:hover {
+        opacity: 0.85;
+      }
+      .status {
+        text-align: center;
+      }
+      .status code {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 0.15rem 0.5rem;
+        border-radius: 0.25rem;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.75rem;
+      }
+      .hint {
+        color: rgba(255, 255, 255, 0.25);
+        font-size: 0.75rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="text-align: center">
+      <h1>Widget Preview</h1>
+      <p class="subtitle">
+        Enter a bot ID and click Load to preview the Draz widget
+      </p>
+    </div>
+
+    <div class="input-row">
+      <input id="botId" type="text" placeholder="Enter Bot / Chatbot ID" />
+      <button onclick="loadWidget()">Load</button>
+    </div>
+
+    <div id="status" class="status" style="display: none">
+      <p class="hint">Widget loaded with ID: <code id="activeId"></code></p>
+      <p class="hint" style="margin-top: 4px">
+        Check the bottom-right corner →
+      </p>
+    </div>
+
+    <script>
+      function loadWidget() {
+        // Cleanup
+        var host = document.getElementById("draz-widget-host");
+        if (host) host.remove();
+        var old = document.getElementById("draz-widget-script");
+        if (old) old.remove();
+
+        var id = document.getElementById("botId").value.trim();
+        if (!id) return;
+
+        var s = document.createElement("script");
+        s.id = "draz-widget-script";
+        s.src = "/draz-widget.js";
+        s.setAttribute("data-chatbot-id", id);
+        s.async = true;
+        document.body.appendChild(s);
+
+        document.getElementById("activeId").textContent = id;
+        document.getElementById("status").style.display = "block";
+      }
+    </script>
+  </body>
+</html>

@@ -7,4 +7,5 @@ export const WidgetConfigContext = createContext<WidgetConfigContextType>({
   config: defaultWidgetConfig,
   isConfigLoaded: false,
   isConfigError: false,
+  deployment: null,
 });

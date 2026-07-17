@@ -6,6 +6,9 @@ import {
   WidgetConfigProvider,
   useWidgetConfig,
   SocketProvider,
+  DeploymentChatProvider,
+  isDeploymentMode,
+  getWidgetMode,
 } from "./context";
 
 // Position class mapping for O(1) lookup
@@ -61,6 +64,13 @@ const WidgetContainer = memo(function WidgetContainer() {
   const [isOpen, setIsOpen] = useState(false);
   const { config, isConfigLoaded } = useWidgetConfig();
 
+  // Transport: deployment mode talks HTTP to the delivery gateway; legacy
+  // workspace mode keeps the socket / super-agent pipeline. Both providers
+  // fill the same SocketContext, so everything below is transport-agnostic.
+  const ChatProvider = isDeploymentMode()
+    ? DeploymentChatProvider
+    : SocketProvider;
+
   // Stable callback reference to prevent child re-renders
   const toggleOpen = useCallback((open: boolean) => setIsOpen(open), []);
 
@@ -76,8 +86,28 @@ const WidgetContainer = memo(function WidgetContainer() {
   // Early return while loading - no DOM footprint
   if (!isConfigLoaded) return null;
 
+  // Inline mode: fill the host container with an always-open chat panel.
+  if (getWidgetMode() === "inline") {
+    return (
+      <ChatProvider>
+        <div
+          className="h-full w-full"
+          role="complementary"
+          aria-label="Chat widget"
+        >
+          <Widget
+            isOpen
+            setIsOpen={() => undefined}
+            config={config}
+            variant="inline"
+          />
+        </div>
+      </ChatProvider>
+    );
+  }
+
   return (
-    <SocketProvider>
+    <ChatProvider>
       <div
         className={`fixed z-50 flex flex-col items-end gap-4 bottom-6 ${positionClass}`}
         role="complementary"
@@ -95,7 +125,7 @@ const WidgetContainer = memo(function WidgetContainer() {
           setIsOpen={toggleOpen}
         />
       </div>
-    </SocketProvider>
+    </ChatProvider>
   );
 });
 

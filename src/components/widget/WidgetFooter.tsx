@@ -1,4 +1,5 @@
 import { Paperclip, SendHorizonal } from "lucide-react";
+import { useWidgetConfig } from "@/context";
 import type { WidgetConfig } from "@/context";
 
 interface WidgetFooterProps {
@@ -18,6 +19,9 @@ const WidgetFooter = ({
   onKeyDown,
   onRestartConversation,
 }: WidgetFooterProps) => {
+  const { deployment } = useWidgetConfig();
+  const placeholder = deployment?.inputPlaceholder || "Ask a question";
+
   return (
     <div
       className="flex flex-col pb-4 items-center justify-between px-4 pt-4 border-t border-gray-100 w-full bg-white"
@@ -47,7 +51,7 @@ const WidgetFooter = ({
             value={inputValue}
             onChange={(e) => onInputChange(e.target.value)}
             onKeyDown={onKeyDown}
-            placeholder="Ask a question"
+            placeholder={placeholder}
             className="flex-1 min-w-0 bg-transparent border-none p-0 text-sm text-gray-700 placeholder:text-[#bababa] focus:outline-none focus:ring-0 focus:shadow-none"
           />
 

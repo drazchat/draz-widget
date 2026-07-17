@@ -11,9 +11,16 @@ interface WidgetProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   config?: WidgetConfig;
+  /** "floating" = launcher panel (default); "inline" = fills its container */
+  variant?: "floating" | "inline";
 }
 
-const Widget = ({ isOpen, setIsOpen, config }: WidgetProps) => {
+const Widget = ({
+  isOpen,
+  setIsOpen,
+  config,
+  variant = "floating",
+}: WidgetProps) => {
   const [isClosing, setIsClosing] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -73,18 +80,26 @@ const Widget = ({ isOpen, setIsOpen, config }: WidgetProps) => {
 
   if (!isVisible) return null;
 
+  const isInline = variant === "inline";
+  const frameClassName = isInline
+    ? "flex h-full w-full flex-col overflow-hidden"
+    : `flex h-[800px] max-h-[calc(100vh-6rem)] w-[400px] flex-col overflow-hidden rounded-2xl ${
+        isClosing ? "animate-widget-close" : "animate-widget-open"
+      }`;
+
   return (
     <div
-      className={`flex h-[800px] max-h-[calc(100vh-6rem)] w-[400px] flex-col overflow-hidden rounded-2xl ${
-        isClosing ? "animate-widget-close" : "animate-widget-open"
-      }`}
-      style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }}
+      className={frameClassName}
+      style={
+        isInline ? undefined : { boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }
+      }
       onAnimationEnd={handleAnimationEnd}
     >
       <WidgetHeader
         config={config}
         onClose={handleClose}
         onRestartConversation={restartConversation}
+        hideClose={isInline}
       />
 
       <ConnectionBanner

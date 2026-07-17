@@ -1,5 +1,5 @@
 import { useRef, useEffect, useLayoutEffect, useMemo, Fragment } from "react";
-import { useSocket, useWidgetConfig } from "@/context";
+import { useSocket, useWidgetConfig, isDeploymentMode } from "@/context";
 import { isColorDark } from "@/lib/color-utils";
 import { isSameDay, formatTime } from "@/lib/date-utils";
 import { getFontSizeClass } from "@/lib/font-utils";
@@ -64,8 +64,10 @@ const WidgetBody = () => {
     });
   }, [messages]);
 
-  // Loading spinner while fetching history or waiting for first message
-  if (isLoadingHistory || messages.length === 0) {
+  // Loading spinner while fetching history. Workspace mode also waits for the
+  // bootstrap welcome message; deployment mode seeds its welcome locally, so
+  // an empty thread there is a valid (brief) state, not a loading one.
+  if (isLoadingHistory || (messages.length === 0 && !isDeploymentMode())) {
     return <LoadingSpinner />;
   }
 
@@ -144,6 +146,31 @@ const WidgetBody = () => {
                   {msg.text}
                 </div>
               </div>
+
+              {/* Image */}
+              {msg.image?.url && (
+                <div className="mt-2 max-w-full overflow-hidden rounded-xl">
+                  <img
+                    src={msg.image.url}
+                    alt={msg.image.alt || ""}
+                    className="max-w-full rounded-xl object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+
+              {/* Video */}
+              {msg.video?.url && (
+                <div className="mt-2 max-w-full overflow-hidden rounded-xl">
+                  <video
+                    src={msg.video.url}
+                    poster={msg.video.thumbnail || undefined}
+                    controls
+                    preload="metadata"
+                    className="max-w-full rounded-xl"
+                  />
+                </div>
+              )}
 
               {/* Cards */}
               {msg.cards && msg.cards.length > 0 && (

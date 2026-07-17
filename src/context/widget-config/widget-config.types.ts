@@ -76,8 +76,23 @@ export const defaultWidgetConfig: WidgetConfig = {
   fontSize: "md",
 };
 
+/**
+ * Chat presentation published with a deployment (from the delivery-gateway
+ * descriptor). Only present in deployment mode.
+ */
+export interface DeploymentPresentation {
+  title: string;
+  subtitle: string;
+  welcomeMessage: string;
+  inputPlaceholder: string;
+  showAssistantAvatar: boolean;
+  suggestedPrompts: string[];
+}
+
 export interface WidgetConfigContextType {
   config: WidgetConfig;
   isConfigLoaded: boolean;
   isConfigError: boolean;
+  /** Deployment-mode extras (welcome message, prompts); null in workspace mode */
+  deployment: DeploymentPresentation | null;
 }
