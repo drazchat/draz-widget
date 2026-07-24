@@ -82,13 +82,16 @@ const WidgetHeader = ({
             <img
               src={config.botAvatar}
               alt=""
-              width={40}
-              height={40}
-              className={`h-10 w-10 object-cover ${
-                config?.avatarShape === "rounded"
-                  ? "rounded-lg"
-                  : "rounded-full"
-              }`}
+              // Inline sizing so the box is always a perfect square (Tailwind
+              // sizing can be squeezed by the flex header → an oval avatar).
+              style={{
+                width: 40,
+                height: 40,
+                objectFit: "cover",
+                flexShrink: 0,
+                display: "block",
+                borderRadius: config?.avatarShape === "rounded" ? 10 : 9999,
+              }}
               onError={(e) => {
                 // Broken avatar URL: collapse instead of a broken-image icon.
                 (e.currentTarget.parentElement as HTMLElement).style.display =
