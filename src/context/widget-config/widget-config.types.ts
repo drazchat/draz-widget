@@ -39,8 +39,11 @@ export interface WidgetConfig {
   // Widget position
   widgetPosition: "right" | "left";
 
-  // Widget size
+  // Chat window size (height only)
   widgetSize: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
+
+  // Launcher bubble size (independent of the window size)
+  bubbleSize: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
 
   // Chat bubble
   showChatBubble: boolean;
@@ -73,6 +76,7 @@ export const defaultWidgetConfig: WidgetConfig = {
   widgetLauncherShape: "circle",
   widgetPosition: "right",
   widgetSize: "lg",
+  bubbleSize: "lg",
   showChatBubble: false,
   userMessageColor: null,
   userMessageTextColor: null,

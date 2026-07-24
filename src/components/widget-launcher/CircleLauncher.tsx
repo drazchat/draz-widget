@@ -22,7 +22,7 @@ const CircleLauncher = memo(function CircleLauncher({
   return (
     <div
       onClick={onClick}
-      className={`cursor-pointer flex items-center justify-center widget-size-${config.widgetSize}`}
+      className={`cursor-pointer flex items-center justify-center widget-size-${config.bubbleSize ?? config.widgetSize}`}
     >
       <div
         className={`flex items-center justify-center text-white transition-transform hover:scale-105 ${animationClass} ${

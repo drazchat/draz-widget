@@ -83,6 +83,9 @@ function descriptorToState(descriptor: Record<string, unknown>): {
     widgetSize:
       (str(theme.widgetSize) as WidgetConfig["widgetSize"]) ??
       defaultWidgetConfig.widgetSize,
+    bubbleSize:
+      (str(theme.bubbleSize) as WidgetConfig["bubbleSize"]) ??
+      defaultWidgetConfig.bubbleSize,
     widgetPosition:
       theme.widgetPosition === "left" ? "left" : "right",
     // Controls

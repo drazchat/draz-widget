@@ -81,22 +81,23 @@ const Widget = ({
   if (!isVisible) return null;
 
   const isInline = variant === "inline";
-  // Panel width from the configured widget size (height stays responsive,
-  // capped to the viewport). Inline embeds fill their container instead.
-  const WIDTH_BY_SIZE: Record<string, number> = {
-    xs: 320,
-    sm: 360,
-    md: 384,
-    lg: 400,
-    xl: 440,
-    "2xl": 480,
-    "3xl": 520,
+  // The size setting changes only the chat window HEIGHT — width stays fixed and
+  // the launcher bubble has its own `bubbleSize`. Height is capped to the
+  // viewport. Inline embeds fill their container instead.
+  const HEIGHT_BY_SIZE: Record<string, number> = {
+    xs: 480,
+    sm: 540,
+    md: 600,
+    lg: 660,
+    xl: 720,
+    "2xl": 780,
+    "3xl": 840,
   };
-  const panelWidth = WIDTH_BY_SIZE[config?.widgetSize ?? "lg"] ?? 400;
+  const panelHeight = HEIGHT_BY_SIZE[config?.widgetSize ?? "lg"] ?? 660;
 
   const frameClassName = isInline
     ? "flex h-full w-full flex-col overflow-hidden"
-    : `flex h-[800px] max-h-[calc(100vh-6rem)] flex-col overflow-hidden rounded-2xl ${
+    : `flex w-[400px] max-w-[calc(100vw-2rem)] max-h-[calc(100vh-6rem)] flex-col overflow-hidden rounded-2xl ${
         isClosing ? "animate-widget-close" : "animate-widget-open"
       }`;
 
@@ -107,8 +108,7 @@ const Widget = ({
         isInline
           ? undefined
           : {
-              width: panelWidth,
-              maxWidth: "calc(100vw - 2rem)",
+              height: panelHeight,
               boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
             }
       }
