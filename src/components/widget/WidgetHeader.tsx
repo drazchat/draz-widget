@@ -78,15 +78,19 @@ const WidgetHeader = ({
     >
       <div className={`${headerColors.title.text} flex items-center gap-3`}>
         {config?.botAvatar ? (
-          <div className="p-1 mt-1">
+          <div className="p-1 mt-1 shrink-0">
             <img
               src={config.botAvatar}
               alt=""
-              // Inline sizing so the box is always a perfect square (Tailwind
-              // sizing can be squeezed by the flex header → an oval avatar).
+              // Inline sizing so the box is always a perfect square. The header
+              // is a flex row; without shrink-0 on the wrapper AND min sizes
+              // here, a global `img{max-width:100%}` squeezes the width → oval.
               style={{
                 width: 40,
                 height: 40,
+                minWidth: 40,
+                minHeight: 40,
+                maxWidth: 40,
                 objectFit: "cover",
                 flexShrink: 0,
                 display: "block",
