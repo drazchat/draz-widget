@@ -64,7 +64,9 @@ const WidgetHeader = ({
       },
       action: {
         icon: isActionLight ? "text-white/50" : "text-black/50",
-        hover: isActionLight ? "hover:bg-white/15 hover:text-white" : "hover:bg-black/10 hover:text-black",
+        hover: isActionLight
+          ? "hover:bg-white/15 hover:text-white"
+          : "hover:bg-black/10 hover:text-black",
       },
     };
   }, [config?.primaryColor, config?.secondaryColor]);
@@ -76,12 +78,17 @@ const WidgetHeader = ({
     >
       <div className={`${headerColors.title.text} flex items-center gap-3`}>
         {config?.botAvatar ? (
-          <div className="rounded-full p-1 mt-1">
+          <div className="p-1 mt-1">
             <img
               src={config.botAvatar}
               alt=""
               width={40}
               height={40}
+              className={`h-10 w-10 object-cover ${
+                config?.avatarShape === "rounded"
+                  ? "rounded-lg"
+                  : "rounded-full"
+              }`}
               onError={(e) => {
                 // Broken avatar URL: collapse instead of a broken-image icon.
                 (e.currentTarget.parentElement as HTMLElement).style.display =

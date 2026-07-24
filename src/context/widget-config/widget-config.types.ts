@@ -23,6 +23,8 @@ export interface WidgetConfig {
   botName: string;
   botSubtitle: string;
   botAvatar: string | null;
+  /** Avatar image shape: fully round or a lightly-rounded square. */
+  avatarShape: "circle" | "rounded";
 
   // Widget info
   widgetIcon: string | null;
@@ -61,6 +63,7 @@ export const defaultWidgetConfig: WidgetConfig = {
   botName: "Draz Assistant",
   botSubtitle: "Ask me anything about Draz.chat",
   botAvatar: "https://animateicons.vercel.app/winter-logo.svg",
+  avatarShape: "circle",
   // botAvatar: "draz-favicon-light.svg",
   // botAvatar: null,
   // widgetIcon: "draz-favicon-dark.svg",

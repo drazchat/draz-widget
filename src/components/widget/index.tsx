@@ -81,9 +81,22 @@ const Widget = ({
   if (!isVisible) return null;
 
   const isInline = variant === "inline";
+  // Panel width from the configured widget size (height stays responsive,
+  // capped to the viewport). Inline embeds fill their container instead.
+  const WIDTH_BY_SIZE: Record<string, number> = {
+    xs: 320,
+    sm: 360,
+    md: 384,
+    lg: 400,
+    xl: 440,
+    "2xl": 480,
+    "3xl": 520,
+  };
+  const panelWidth = WIDTH_BY_SIZE[config?.widgetSize ?? "lg"] ?? 400;
+
   const frameClassName = isInline
     ? "flex h-full w-full flex-col overflow-hidden"
-    : `flex h-[800px] max-h-[calc(100vh-6rem)] w-[400px] flex-col overflow-hidden rounded-2xl ${
+    : `flex h-[800px] max-h-[calc(100vh-6rem)] flex-col overflow-hidden rounded-2xl ${
         isClosing ? "animate-widget-close" : "animate-widget-open"
       }`;
 
@@ -91,7 +104,13 @@ const Widget = ({
     <div
       className={frameClassName}
       style={
-        isInline ? undefined : { boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)" }
+        isInline
+          ? undefined
+          : {
+              width: panelWidth,
+              maxWidth: "calc(100vw - 2rem)",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+            }
       }
       onAnimationEnd={handleAnimationEnd}
     >

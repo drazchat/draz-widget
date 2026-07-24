@@ -20,22 +20,24 @@ interface ConfigState {
 
 /**
  * Map a delivery-gateway chat descriptor onto the widget's config model.
- * `workspaceTheme` is the workspace widget-settings panel config (colors,
- * launcher, fonts, avatar) — it styles the widget, while the deployment
- * descriptor owns the conversation content (title, welcome, prompts).
+ *
+ * The descriptor's `theme` is the SINGLE source of truth for appearance — it is
+ * the per-workflow look the author published, so two workflows in one workspace
+ * render as two distinct chatbots. There is no second request to a shared
+ * workspace theme; `defaultWidgetConfig` only fills fields the theme omits.
  */
-function descriptorToState(
-  descriptor: Record<string, unknown>,
-  workspaceTheme: Partial<WidgetConfig>,
-): {
+function descriptorToState(descriptor: Record<string, unknown>): {
   config: WidgetConfig;
   deployment: DeploymentPresentation;
 } {
   const theme = (descriptor.theme ?? {}) as Record<string, unknown>;
-  const iconImage =
-    typeof theme.iconImage === "string" && theme.iconImage
-      ? theme.iconImage
-      : null;
+
+  const str = (v: unknown): string | undefined =>
+    typeof v === "string" && v ? v : undefined;
+  const bool = (v: unknown): boolean | undefined =>
+    typeof v === "boolean" ? v : undefined;
+
+  const iconImage = str(theme.iconImage) ?? null;
 
   const deployment: DeploymentPresentation = {
     title: typeof descriptor.title === "string" ? descriptor.title : "",
@@ -57,29 +59,48 @@ function descriptorToState(
       : [],
   };
 
-  const themed: WidgetConfig = {
-    ...defaultWidgetConfig,
-    ...workspaceTheme,
-  };
-
-  const panelAvatar =
-    typeof workspaceTheme.botAvatar === "string" && workspaceTheme.botAvatar
-      ? workspaceTheme.botAvatar
-      : null;
+  // Map the published theme (widget vocabulary already resolved by the builder)
+  // onto WidgetConfig; every field falls back to the widget default.
+  const showAssistantAvatar =
+    bool(theme.showAssistantAvatar) ?? deployment.showAssistantAvatar;
 
   const config: WidgetConfig = {
-    ...themed,
-    // Deployment content beats panel copy; panel theme styles everything.
-    botName: deployment.title || themed.botName,
-    botSubtitle: deployment.subtitle || themed.botSubtitle,
-    // Published deployment icon wins; else the panel's avatar; never the
-    // Draz default on a customer-branded deployment.
-    botAvatar: deployment.showAssistantAvatar
-      ? iconImage || panelAvatar
-      : null,
-    widgetIcon: iconImage || themed.widgetIcon,
-    // Deployment chat has no home-screen flow; the restart action lives in
-    // the header menu, so hide the footer home button.
+    ...defaultWidgetConfig,
+    // Colors
+    primaryColor: str(theme.primaryColor) ?? defaultWidgetConfig.primaryColor,
+    secondaryColor:
+      str(theme.secondaryColor) ?? defaultWidgetConfig.secondaryColor,
+    userMessageColor:
+      str(theme.bubbleColor) ?? defaultWidgetConfig.userMessageColor,
+    // Launcher
+    widgetLauncherShape:
+      (str(theme.launcherStyle) as WidgetConfig["widgetLauncherShape"]) ??
+      defaultWidgetConfig.widgetLauncherShape,
+    launcherAnimation:
+      (str(theme.launcherAnimation) as WidgetConfig["launcherAnimation"]) ??
+      defaultWidgetConfig.launcherAnimation,
+    // Layout
+    widgetSize:
+      (str(theme.widgetSize) as WidgetConfig["widgetSize"]) ??
+      defaultWidgetConfig.widgetSize,
+    widgetPosition:
+      theme.widgetPosition === "left" ? "left" : "right",
+    // Controls
+    showOptionsMenu:
+      bool(theme.showOptionsButton) ?? defaultWidgetConfig.showOptionsMenu,
+    showBranding: bool(theme.showBranding) ?? defaultWidgetConfig.showBranding,
+    // Fonts
+    fontSize:
+      (str(theme.fontSize) as WidgetConfig["fontSize"]) ??
+      defaultWidgetConfig.fontSize,
+    avatarShape: theme.avatarShape === "rounded" ? "rounded" : "circle",
+    // Content (descriptor copy beats theme)
+    botName: deployment.title || defaultWidgetConfig.botName,
+    botSubtitle: deployment.subtitle || defaultWidgetConfig.botSubtitle,
+    // Published icon; never the Draz default on a customer-branded deployment.
+    botAvatar: showAssistantAvatar ? iconImage : null,
+    widgetIcon: iconImage || defaultWidgetConfig.widgetIcon,
+    // Deployment chat has no home-screen flow; restart lives in the header menu.
     showHomeButton: false,
   };
 
@@ -124,33 +145,9 @@ export const WidgetConfigProvider = ({ children }: { children: ReactNode }) => {
         const data = await response.json();
         const descriptor = (data.data ?? {}) as Record<string, unknown>;
 
-        // The workspace widget-settings panel styles the widget (colors,
-        // launcher, fonts, avatar). Best-effort: theming must never block
-        // the conversation.
-        let workspaceTheme: Partial<WidgetConfig> = {};
-        const workspaceId =
-          typeof descriptor.workspaceId === "string"
-            ? descriptor.workspaceId
-            : "";
-        if (workspaceId) {
-          try {
-            const themeRes = await fetch(
-              `${getApiUrl()}/auth/widget/config/${workspaceId}`,
-              { signal: controller.signal, headers: { Accept: "application/json" } },
-            );
-            if (themeRes.ok) {
-              const themeData = await themeRes.json();
-              workspaceTheme = themeData.config || {};
-            }
-          } catch {
-            /* theme is optional */
-          }
-        }
-
-        const { config, deployment } = descriptorToState(
-          descriptor,
-          workspaceTheme,
-        );
+        // The descriptor carries the full per-workflow theme, so the widget
+        // renders from a single request — no shared workspace-theme fetch.
+        const { config, deployment } = descriptorToState(descriptor);
         setState({
           config,
           deployment,
