@@ -22,6 +22,21 @@ import { useWidgetConfig } from "../widget-config";
 
 const SESSION_STORAGE_PREFIX = "draz_dep_session:";
 
+/**
+ * The visitor's IANA timezone, e.g. "Europe/Lisbon".
+ *
+ * Sent with every turn so the agent resolves "tomorrow" against the visitor's
+ * calendar rather than UTC. Undefined on a browser that won't say, which the
+ * server handles by falling back to the agent's own timezone.
+ */
+function browserTimeZone(): string | undefined {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 function newSessionKey(): string {
   if (typeof crypto?.randomUUID === "function") {
     return crypto.randomUUID().replace(/-/g, "");
@@ -198,6 +213,11 @@ export const DeploymentChatProvider = ({
             body: JSON.stringify({
               sessionKey: sessionKeyRef.current,
               message: payload,
+              // What "tomorrow" means depends on where the visitor is. The
+              // agent only falls back to this when it hasn't been pinned to a
+              // timezone of its own; an unrecognized value is ignored server
+              // side, so an odd browser costs nothing.
+              timeZone: browserTimeZone(),
             }),
           }
         );
